@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+cpp:
+image: cpp
+build: .
+ports:
+  - 3300:3300
