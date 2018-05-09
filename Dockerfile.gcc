@@ -1,1 +1,13 @@
-FROM gcc
+FROM gcc AS builder
+
+COPY hello.cpp /cpp
+WORKDIR /cpp
+RUN make hello
+
+
+FROM alpine
+
+COPY --from=builder /cpp/hello /cpp/hello
+WORKDIR /cpp
+
+CMD ["hello"]
