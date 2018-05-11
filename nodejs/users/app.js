@@ -4,12 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var stylus = require('stylus');
-var MongoClient = require('mongodb').MongoClient;
-var Server = require('mongodb').Server;
 
+var Mongoose = require('mongoose')
+var UserSchema= Mongoose.Schema({firstname:String,lastname:String,age:{ type: Number, min: 0, max: 100} });
+var User = Mongoose.model('UserModel', UserSchema)
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -25,13 +24,38 @@ app.use(cookieParser());
 app.use(stylus.middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req,res,next){
-  req.db = db;
-  next();
+app.post('/adduser', function(req,res,err){
+  var user = new User({firstname:req.body.firstname,lastname:req.body.lastname,age:req.body.age});
+  user.save(function(err,silence){
+    if(err){
+      console.err(err);
+      throw err;
+    }
+    res.send('success');
+  });
 });
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.get('/getuser/:firstname', function(req,res,err){
+  User.findOne({'firtname':req.params.firtname}, function(err,user){
+      if(err){
+          console.err(err);
+          throw err;
+      }
+      console.log(user);
+      res.send(200, user);
+  });
+});
+
+app.get('/getuserbyage/:age', function(req,res,err){
+  User.findOne({'age':req.params.age}, function(err,user){
+      if(err){
+          console.err(err);
+          throw err;
+      }
+      console.log(user);
+      res.send(200, user);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,10 +73,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoUrl = 'localhost'
-MongoClient.connect('mongodb://' + mongoUrl + ':27017/school', function(error, db){
+
+var mongoUrl = 'localhost'
+Mongoose.connect('mongodb://' + mongoUrl + ':27017/users', function(error){
   if(error) {
       console.log(error);
+      throw error
   } else {
     app.listen(8888, function() {
       console.log('chat service listening on port 8888')

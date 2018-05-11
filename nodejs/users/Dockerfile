@@ -1,4 +1,5 @@
-From node:latest
+
+FROM node:latest
 RUN mkdir -p /usr/node/userservice
 
 WORKDIR /usr/node/userservice
@@ -9,3 +10,5 @@ COPY . /usr/node/userservice
 EXPOSE 8888
 
 CMD ["node", "app.js"]
+
+
