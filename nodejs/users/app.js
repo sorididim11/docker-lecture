@@ -49,8 +49,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoContainreName = 'mymongo'
-MongoClient.connect('mongodb://' + mongoContainreName + ':27017/school', function(error, db){
+mongoUrl = 'localhost'
+MongoClient.connect('mongodb://' + mongoUrl + ':27017/school', function(error, db){
   if(error) {
       console.log(error);
   } else {

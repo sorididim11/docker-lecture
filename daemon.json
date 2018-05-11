@@ -4,6 +4,5 @@
   "hosts": ["tcp://192.168.59.3:2376", "unix:///var/run/docker.sock"],
   "tls": true,
   "tlscert": "/var/docker/server.pem",
-  "tlskey": "/var/docker/serverkey.pem",
-
+  "tlskey": "/var/docker/serverkey.pem"
 }
