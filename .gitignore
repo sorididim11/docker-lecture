@@ -1,0 +1,4 @@
+.vscode
+nodejs/chatservice/node_modules/
+Dockerfile
+nodejs/chatservice/bin
