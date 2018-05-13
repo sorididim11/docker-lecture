@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    container_name: web_counter
     build: .
     ports:
      - "5000:5000"
