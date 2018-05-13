@@ -7,5 +7,18 @@ services:
      - "5000:5000"
     volumes:
      - .:/code
+    networks:
+      - frontend
+      - internal
   redis:
     image: "redis:alpine"
+    networks:
+      - backend
+      - internal
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+  internal:
+    driver: bridge
