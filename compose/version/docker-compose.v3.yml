@@ -1,4 +1,13 @@
 version: "3"
+
+version: '3'
+services:
+  webapp:
+    build:
+      context: ./dir
+      dockerfile: Dockerfile.prod
+   
+
 services:
   web:
     # replace username/repo:tag with your name and image details
@@ -22,10 +31,11 @@ services:
     networks:
       - webnet
       - mybridge
-    
+
+# for compatiblity between single host and swarm, omitting driver is good strategy because default driver
+# depending on bridge on single host, overlay on swarm
 networks:
   webnet:
-    driver: overlay
-  mybridge:
-    driver: bridge
-  myoverlay:
+  mydefault:
+    #driver: bridge       #it can be created when using swarm, but service can't be launched 
+
