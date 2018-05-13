@@ -1,8 +1,11 @@
 {
   "debug": true,
+  "expiermental": true,
+  "live-restore": true,
+  "labels": ["com.gpu_enabled=true", "team.front=nginx"],
   "insecure-registries": ["10.0.15.11:5000"],
   "hosts": ["tcp://192.168.59.3:2376", "unix:///var/run/docker.sock"],
   "tls": true,
   "tlscert": "/var/docker/server.pem",
   "tlskey": "/var/docker/serverkey.pem"
-}
+} 

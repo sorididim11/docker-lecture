@@ -3,6 +3,10 @@ services:
   web:
     # replace username/repo:tag with your name and image details
     image: sorididim11/web_counter:1.0
+    ports:
+      - "5000:5000"
+    networks:
+      - webnet
     deploy:
       replicas: 5
       resources:
@@ -11,9 +15,5 @@ services:
           memory: 50M
       restart_policy:
         condition: on-failure
-    ports:
-      - "80:80"
-    networks:
-      - webnet
 networks:
   webnet:
