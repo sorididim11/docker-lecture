@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    container_name: web_counter
+    # container_name: web_counter #compose can't scale service with contianer_name
     build: .
     ports:
      - "5000:5000"
