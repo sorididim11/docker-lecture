@@ -5,6 +5,8 @@ services:
     build: rng
     ports:
     - "8001:80"
+    networks:
+      - coins-net
 
   hasher:
     build: hasher
