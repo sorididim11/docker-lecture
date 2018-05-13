@@ -4,10 +4,13 @@ services:
     # container_name: web_counter #compose can't scale service with contianer_name
     build: .
     image: sorididim11/web:${APP_VERSION} # from .env file
+    command: []
     ports:
      - "5000:5000"
     environment:
       - DEBUG=1
+    env_file:
+      - test.env
     volumes:
      - .:/code
     networks:
