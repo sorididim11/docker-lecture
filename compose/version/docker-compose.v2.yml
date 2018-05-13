@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  web:
+    build: .
+    ports: 
+      - "5000:5000"
+    volumes:
+      - .:/code
+    networks:
+      - front-tier
+      - back-tier
+
+  reids:
+    image: redis
+    volumes:
+      - redis-data:/var/lib/redis
+    networks:
+      - back-tier
+volumes:
+  redis-data:
+    driver: local
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
