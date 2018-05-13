@@ -22,12 +22,16 @@ services:
 
   redis:
     image: redis
+    volumes:
+      myvol: /var/lib/redis
 
   worker:
     build: worker
     # networks:
     #   - coins-net
-
+volumes:
+  myvol:
+    driver: local
 # networks:
 #   coins-net:
 
