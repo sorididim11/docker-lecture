@@ -40,7 +40,7 @@ def work_loop(interval=1):
             redis.incrby("hashes", loops_done)
             loops_done = 0
             deadline = time.time() + interval
-        work_once()
+        work_once() # get bytes, pass it to hash, update redis
         loops_done += 1
 
 
