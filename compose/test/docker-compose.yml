@@ -2,20 +2,12 @@ version: '3'
 services:
   web:
     # container_name: web_counter #compose can't scale service with contianer_name
-    build: .
     image: sorididim11/web:${APP_VERSION} # from .env file
-    command: []
-    ports:
-     - "5000:5000"
-    environment:
-      - DEBUG=1
-    env_file:
-      - test.env
-    volumes:
-     - .:/code
     networks:
       - frontend
       - internal
+    depends_on:
+      - "redis"
   redis:
     image: "redis:alpine"
     networks:
@@ -25,6 +17,4 @@ networks:
   frontend:
     driver: bridge
   backend:
-    driver: bridge
   internal:
-    driver: bridge

@@ -1,4 +1,5 @@
 import time
+import os
 
 import redis
 from flask import Flask
@@ -26,4 +27,6 @@ def hello():
     return 'Hello Docker! counter: {} times.\n'.format(count)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    is_debug = True if os.environ['DEBUG'] == '1' else False
+    print(is_debug)
+    app.run(host="0.0.0.0", debug=is_debug)
