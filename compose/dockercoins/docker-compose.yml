@@ -23,6 +23,8 @@ services:
 
   worker:
     build: worker
+    networks:
+      - coins-net
 
 networks:
   coins-net:
