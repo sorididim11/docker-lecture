@@ -30,7 +30,7 @@ services:
     # networks:
     #   - coins-net
 volumes:
-  myvol:
+  coins-redis-vol:
     driver: local
 # networks:
 #   coins-net:
