@@ -23,7 +23,7 @@ services:
   redis:
     image: redis
     volumes:
-      - "myvol:/var/lib/redis"
+      - "coins-redis-vol:/var/lib/redis"
 
   worker:
     build: worker
