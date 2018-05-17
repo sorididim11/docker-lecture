@@ -25,7 +25,7 @@ def get_hit_count():
 def hello():
     count = get_hit_count()
     return 'Hello Docker! counter: {} times.\n'.format(count)
-
+    
 if __name__ == "__main__":
     is_debug = True if os.environ['DEBUG'] == '1' else False
     print(is_debug)
