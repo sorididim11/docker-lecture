@@ -1,0 +1,13 @@
+{
+	"defaultAction": "SCMP_ACT_ERRNO",
+	"syscalls": [
+        {
+            "name": "chmod",
+            "action": "SCMP_ACT_ALLOW"
+        },
+        {
+            "name": "mkdir",
+            "action": "SCMP_ACT_ALLOW"
+        }
+	]
+}
