@@ -1,0 +1,14 @@
+FROM gcc AS compiler
+MAINTAINER sorididim11 <jong-gun@hpe.com>
+
+WORKDIR /compiler
+COPY hello.cpp /compiler
+RUN make hello
+
+
+FROM centos:7
+COPY --from=compiler /compiler/hello /cpp/hello
+WORKDIR /cpp
+
+
+CMD ["/cpp/hello"]

@@ -1,0 +1,15 @@
+FROM gcc AS compiler
+MAINTAINER sorididim11 <jong-gun@hpe.com>
+
+WORKDIR /compiler
+COPY hello.cpp /compiler
+RUN make hello
+
+
+FROM busybox
+
+RUN mkdir /cpp
+WORKDIR /cpp
+COPY --from=compiler /compiler/hello /cpp/hello
+
+CMD ["/cpp/hello"]
