@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  rng:
+    image: sorididim11/dockercoins_rng
+    ports:
+    - "8001:80"
+    networks:
+      - coins-net
+
+  hasher:
+    image: sorididim11/dockercoins_hasher
+    ports:
+    - "8002:80"
+    networks:
+      - coins-net
+
+  webui:
+    image: sorididim11/dockercoins_webui
+    ports:
+    - "8000:80"
+    networks:
+      - coins-net
+
+
+  redis:
+    image: redis
+    volumes:
+      - "coins-redis-vol:/var/lib/redis"
+    networks:
+      - coins-net
+
+
+  worker:
+    image: sorididim11/dockercoins_worker
+    networks:
+      - coins-net
+
+  health_test:
+    image: luksa/kubia-unhealthy
+    ports:
+    - "8090:8080"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost || exit 1
+      interval: 60s
+      retries: 5
+      timeout: 10s
+
+
+volumes:
+  coins-redis-vol:
+    driver: local
+networks:
+  coins-net:
+    driver: overlay
+
